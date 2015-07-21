@@ -33,8 +33,6 @@ def main():
             print(t)
             add_tweet = 0
             for row in db.execute('SELECT * FROM tweets WHERE tweet_id=?', (t,)):
-                # Why isn't this saving results from previous sessions?
-                print(row)
                 add_tweet += 1
             if add_tweet == 0:
                 # | TEXT | CREATED_AT | TWEET_ID | USER_ID |
@@ -50,6 +48,7 @@ def main():
         except StopIteration:
             break
 
+    conn.commit()
     print(str(count) + " Tweets recorded.")
 
 main()
